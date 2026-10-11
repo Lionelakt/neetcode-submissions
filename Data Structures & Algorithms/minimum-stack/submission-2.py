@@ -1,0 +1,23 @@
+import numpy as np
+
+class MinStack:
+
+    def __init__(self):
+        self.stack_mini = [np.inf]
+        self.stack = []
+        
+    def push(self, val: int) -> None:
+        self.stack.append(val)
+        if self.stack and self.stack[-1] <= self.stack_mini[-1]:
+            self.stack_mini.append(self.stack[-1])
+        
+    def pop(self) -> None:
+        if self.stack_mini[-1] == self.stack[-1]:
+            self.stack_mini.pop()
+        self.stack.pop()
+        
+    def top(self) -> int:
+        return self.stack[-1]
+
+    def getMin(self) -> int:
+        return self.stack_mini[-1]
